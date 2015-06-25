@@ -51,7 +51,7 @@ var countries = [
 ];
 
 React.render(
-  React.createElement(DynamicSearch, {items: countries }),
+  React.createElement(DynamicSearch, {items:  countries }),
   document.getElementById('main')
 );
 

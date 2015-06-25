@@ -1,5 +1,42 @@
 /** @jsx React.DOM */
 
+var Navigation = React.createClass({
+  render : function() {
+    return (
+      <div>
+        <p style={{textAlign: 'left', fontStyle: 'italic'}}> The Medium is the Machine </p>
+        <ul>
+          <NavItem name="Portrait #1: A Number" route="number"/>
+          <NavItem name="Portrait #2: A Map" route="map"/>
+          <NavItem name="Portrait #3: A Robot" route="robot"/>
+          <NavItem name="Portrait #4: An Ad" route="ad"/>
+        </ul>
+      </div>
+      )
+  }
+});
+
+var NavItem = React.createClass({
+  handleClick: function(event){
+    console.log(event.target);
+  },
+  render : function() {
+    return (
+        <li onClick={ this.handleClick } > 
+          <NavLink link={ this.props.route } name={ this.props.name } />
+        </li>
+      )
+  }
+});
+
+var NavLink = React.createClass({
+  render : function(){
+    return (
+      <a href={this.props.link}> { this.props.name } </a>
+      )
+  }
+})
+
 var DynamicSearch = React.createClass({
 
   // sets initial state
@@ -50,6 +87,6 @@ var countries = [
 ];
 
 React.render(
-  <DynamicSearch items={ countries } />,
-  document.getElementById('main')
+  <Navigation />,
+  document.getElementById('nav')
 );

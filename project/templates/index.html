@@ -7,17 +7,17 @@
     <!-- styles -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+
   </head>
   <body>
     <div class="container">
-      <h1>Flask React</h1>
-      <br>
-      <div id="main"></div>
+      <div id="nav" class="nav"></div>
     </div>
     <!-- scripts -->
     <script src="{{ url_for('static', filename='bower_components/react/react.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bower_components/react/JSXTransformer.js') }}"></script>
     <script src="{{ url_for('static', filename='bower_components/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ url_for('static', filename='bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/js/main.js') }}"></script>
+    <script type="text/jsx" src="{{ url_for('static', filename='scripts/jsx/main.js') }}"></script>
   </body>
 </html>

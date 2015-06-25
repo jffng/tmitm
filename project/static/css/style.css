@@ -3,7 +3,12 @@
 .container {
   text-align: center;
   padding-top: 50px;
+  margin: 0px;
   max-width: 300px;
+}
+
+#nav {
+  border-right: 1px solid;
 }
 
 input{
@@ -16,6 +21,6 @@ input{
 }
 
 ul{
-  margin-left: 20px;
-  text-align: left;
+/*  margin-left: 20px;
+*/  text-align: left;
 }
