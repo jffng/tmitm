@@ -1,6 +1,81 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 /** @jsx React.DOM */
 
+var Navigation = React.createClass({displayName: "Navigation",
+  render : function() {
+    return (
+      React.createElement("div", {id: "sidebar-wrapper"}, 
+        React.createElement("ul", {className: "sidebar-nav"}, 
+          React.createElement("li", {className: "sidebar-brand"}, " The Medium is the Machine "), 
+          React.createElement(NavItem, {name: "Portrait #1: A Number", route: "#number"}), 
+          React.createElement(NavItem, {name: "Portrait #2: A Map", route: "#map"}), 
+          React.createElement(NavItem, {name: "Portrait #3: A Robot", route: "#robot"}), 
+          React.createElement(NavItem, {name: "Portrait #4: An Ad", route: "#ad"})
+        )
+      )
+      )
+  }
+});
+
+var NavItem = React.createClass({displayName: "NavItem",
+  handleClick: function(event){
+    React.render(React.createElement(PostBody, {name: this.props.name}), document.getElementById('post'));
+  },
+  render : function() {
+    return (
+        React.createElement("li", {onClick:  this.handleClick}, 
+          React.createElement(NavLink, {link:  this.props.route, name:  this.props.name})
+        )
+      )
+  }
+});
+
+var NavLink = React.createClass({displayName: "NavLink",
+  render : function(){
+    return (
+      React.createElement("a", {href: this.props.link}, " ",  this.props.name, " ")
+      )
+  }
+});
+
+var PostBody = React.createClass({displayName: "PostBody",
+  render: function () {
+    return (
+      React.createElement("div", {className: "post-body"}, 
+        React.createElement(PostTitle, {name: this.props.name}), 
+        React.createElement(Vimeo, null)
+      )
+      )
+  }
+});
+
+var PostTitle = React.createClass({displayName: "PostTitle",
+  render: function() {
+    return (
+        React.createElement("div", {className: "post-title"}, 
+        React.createElement("h3", null, " ", this.props.name, " ")
+        )
+      )
+  }
+});
+
+var PostContainer = React.createClass({displayName: "PostContainer",
+  render : function(){
+    return (
+      React.createElement("div", {id: "post"}
+      )
+    )
+  }
+});
+
+var Vimeo = React.createClass({displayName: "Vimeo",
+  render: function(){
+    return (
+      React.createElement("iframe", {src: "https://player.vimeo.com/video/127062347", width: "500", height: "281", frameborder: "0", webkitallowfullscreen: true, mozallowfullscreen: true, allowfullscreen: true})
+    )
+  }
+});
+
 var DynamicSearch = React.createClass({displayName: "DynamicSearch",
 
   // sets initial state
@@ -39,20 +114,12 @@ var DynamicSearch = React.createClass({displayName: "DynamicSearch",
 
 });
 
-// list of countries, defined with JavaScript object literals
-var countries = [
-  {"name": "Sweden"}, {"name": "China"}, {"name": "Peru"}, {"name": "Czech Republic"},
-  {"name": "Bolivia"}, {"name": "Latvia"}, {"name": "Samoa"}, {"name": "Armenia"},
-  {"name": "Greenland"}, {"name": "Cuba"}, {"name": "Western Sahara"}, {"name": "Ethiopia"},
-  {"name": "Malaysia"}, {"name": "Argentina"}, {"name": "Uganda"}, {"name": "Chile"},
-  {"name": "Aruba"}, {"name": "Japan"}, {"name": "Trinidad and Tobago"}, {"name": "Italy"},
-  {"name": "Cambodia"}, {"name": "Iceland"}, {"name": "Dominican Republic"}, {"name": "Turkey"},
-  {"name": "Spain"}, {"name": "Poland"}, {"name": "Haiti"}
-];
-
 React.render(
-  React.createElement(DynamicSearch, {items:  countries }),
-  document.getElementById('main')
+  React.createElement("div", {id: "main"}, 
+    React.createElement(Navigation, null), 
+    React.createElement(PostContainer, null)
+  ),
+  document.getElementById('container')
 );
 
 },{}]},{},[1])

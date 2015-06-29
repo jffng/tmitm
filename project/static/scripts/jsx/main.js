@@ -3,13 +3,13 @@
 var Navigation = React.createClass({
   render : function() {
     return (
-      <div>
-        <p style={{textAlign: 'left', fontStyle: 'italic'}}> The Medium is the Machine </p>
-        <ul>
-          <NavItem name="Portrait #1: A Number" route="number"/>
-          <NavItem name="Portrait #2: A Map" route="map"/>
-          <NavItem name="Portrait #3: A Robot" route="robot"/>
-          <NavItem name="Portrait #4: An Ad" route="ad"/>
+      <div id="sidebar-wrapper">
+        <ul className="sidebar-nav">
+          <li className="sidebar-brand"> The Medium is the Machine </li>        
+          <NavItem name="Portrait #1: A Number" route="#number"/>
+          <NavItem name="Portrait #2: A Map" route="#map"/>
+          <NavItem name="Portrait #3: A Robot" route="#robot"/>
+          <NavItem name="Portrait #4: An Ad" route="#ad"/>
         </ul>
       </div>
       )
@@ -18,7 +18,7 @@ var Navigation = React.createClass({
 
 var NavItem = React.createClass({
   handleClick: function(event){
-    console.log(event.target);
+    React.render(<PostBody name={this.props.name}/>, document.getElementById('post'));
   },
   render : function() {
     return (
@@ -35,7 +35,45 @@ var NavLink = React.createClass({
       <a href={this.props.link}> { this.props.name } </a>
       )
   }
-})
+});
+
+var PostBody = React.createClass({
+  render: function () {
+    return (
+      <div className="post-body">
+        <PostTitle name={this.props.name}/>
+        <Vimeo/>
+      </div>
+      )
+  }
+});
+
+var PostTitle = React.createClass({
+  render: function() {
+    return (
+        <div className="post-title">
+        <h3 > {this.props.name} </h3>
+        </div>
+      )
+  }
+});
+
+var PostContainer = React.createClass({
+  render : function(){
+    return (
+      <div id="post">
+      </div>
+    )
+  }
+});
+
+var Vimeo = React.createClass({
+  render: function(){
+    return (
+      <iframe src="https://player.vimeo.com/video/127062347" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+    )
+  }
+});
 
 var DynamicSearch = React.createClass({
 
@@ -75,18 +113,10 @@ var DynamicSearch = React.createClass({
 
 });
 
-// list of countries, defined with JavaScript object literals
-var countries = [
-  {"name": "Sweden"}, {"name": "China"}, {"name": "Peru"}, {"name": "Czech Republic"},
-  {"name": "Bolivia"}, {"name": "Latvia"}, {"name": "Samoa"}, {"name": "Armenia"},
-  {"name": "Greenland"}, {"name": "Cuba"}, {"name": "Western Sahara"}, {"name": "Ethiopia"},
-  {"name": "Malaysia"}, {"name": "Argentina"}, {"name": "Uganda"}, {"name": "Chile"},
-  {"name": "Aruba"}, {"name": "Japan"}, {"name": "Trinidad and Tobago"}, {"name": "Italy"},
-  {"name": "Cambodia"}, {"name": "Iceland"}, {"name": "Dominican Republic"}, {"name": "Turkey"},
-  {"name": "Spain"}, {"name": "Poland"}, {"name": "Haiti"}
-];
-
 React.render(
-  <Navigation />,
-  document.getElementById('nav')
+  <div id="main">
+    <Navigation />
+    <PostContainer /> 
+  </div>,
+  document.getElementById('container')
 );
